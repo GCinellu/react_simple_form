@@ -2,7 +2,7 @@ import React from 'react';
 import store from '../reducers';
 
 import { redirect }      from '../router'
-import { isEmptyObject } from '../utils'
+import { hasEmptyValues } from '../utils'
 
 import PageComponent from '../components/PageComponent';
 
@@ -18,7 +18,9 @@ class ConfirmationStep extends PageComponent {
   render() {
     const subscriberData = store.getState().subscriber;
 
-    if (isEmptyObject(subscriberData)) {
+
+    console.log(subscriberData);
+    if (hasEmptyValues(subscriberData)) {
       redirect('/');
       return null;
     }
@@ -33,6 +35,12 @@ class ConfirmationStep extends PageComponent {
               <li>Last Name: { subscriberData.nameLast }</li>
               <li>Addition: { subscriberData.nameAddition }</li>
               <li>Initials: { subscriberData.nameInitials }</li>
+
+              <li>Street: { subscriberData.addressStreet }</li>
+              <li>Number: { subscriberData.addressNumber }</li>
+              <li>Addition: { subscriberData.addressAddition }</li>
+              <li>Postcode: { subscriberData.addressPostcode }</li>
+              <li>City: { subscriberData.addressCity }</li>
             </ul>
           </div>
         </div>

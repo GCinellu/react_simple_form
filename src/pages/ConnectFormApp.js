@@ -14,7 +14,7 @@ class ConnectFormApp extends PageComponent {
       <div>
         <h1 className="text-center">Connect Form Test Tool</h1>
         <div className="row">
-          <div className="col-sm-8">
+          <div className="col-sm-8 col-centered">
             <AddSubscriber />
           </div>
         </div>

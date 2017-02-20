@@ -23,6 +23,8 @@ class AddSubscriber extends PageComponent {
         addressStreet: '',
         addressNumber: '',
         addressAddition: '',
+        addressPostcode: '',
+        addressCity: '',
       };
     }
   }
@@ -34,13 +36,21 @@ class AddSubscriber extends PageComponent {
     redirect('/confirmation-step')
   }
 
-  onChangeInputField(inputKey, event) {
+  onChangeNameInput(inputKey, event) {
     let newState = {};
     newState[inputKey] = event.target.value;
 
-    this.setState(newState);
+    // in react this.setState() function in any component is asynchronous or is called
+    // after the completion of the function that it was called in
 
-    if (inputKey.match(/name/)) this.initialsFromName();
+    // You can call a function after the state value has updated:
+    // this.setState({foo: 'bar'}, () => { // Do something here. });
+
+    this.setState(newState, () => { this.initialsFromName() });
+  }
+
+  onChangeAddressInput(event) {
+
   }
 
   initialsFromName() {
@@ -50,9 +60,11 @@ class AddSubscriber extends PageComponent {
       nameLast: this.state.nameLast
     };
 
-    this.state.nameInitials = initialCapitalizedWithDot(info.nameFirst) +
+    let text = initialCapitalizedWithDot(info.nameFirst) +
       initialCapitalizedWithDot(info.nameAddition) +
       initialCapitalizedWithDot(info.nameLast);
+
+    this.setState({nameInitials: text});
   }
 
   render() {
@@ -65,20 +77,9 @@ class AddSubscriber extends PageComponent {
             <label htmlFor="name-first">First name</label>
             <input
               type="text"
-              onChange={(e) => this.onChangeInputField('nameFirst', e) }
+              onChange={(e) => this.onChangeNameInput('nameFirst', e) }
               value={ this.state.nameFirst }
               id="name-first"
-              className="form-control"
-            />
-          </div>
-
-          <div className="form-group">
-            <label htmlFor="name-last">Last name</label>
-            <input
-              type="text"
-              onChange={(e) => this.onChangeInputField('nameLast', e) }
-              value={ this.state.nameLast }
-              id="name-last"
               className="form-control"
             />
           </div>
@@ -87,9 +88,20 @@ class AddSubscriber extends PageComponent {
             <label htmlFor="name-addition">Addition</label>
             <input
               type="text"
-              onChange={(e) => this.onChangeInputField('nameAddition', e) }
+              onChange={(e) => this.onChangeNameInput('nameAddition', e) }
               value={ this.state.nameAddition }
               id="name-addition"
+              className="form-control"
+            />
+          </div>
+
+          <div className="form-group">
+            <label htmlFor="name-last">Last name</label>
+            <input
+              type="text"
+              onChange={(e) => this.onChangeNameInput('nameLast', e) }
+              value={ this.state.nameLast }
+              id="name-last"
               className="form-control"
             />
           </div>
@@ -98,16 +110,91 @@ class AddSubscriber extends PageComponent {
             <label htmlFor="name-initials">Initials</label>
             <input
               type="text"
-              onChange={(e) => this.onChangeInputField('nameInitials', e) }
               value={ this.state.nameInitials }
               id="name-initials"
-              className="form-control-static"
+              className="form-control form-control-static"
+              disabled="disabled"
             />
           </div>
 
-          <button type="submit">
-            Submit
-          </button>
+          <h3 className="text-center">Address</h3>
+          <hr/>
+
+          <div className="row">
+            <div className="col-xs-6">
+              <div className="form-group">
+                <label htmlFor="address-street">Street Name</label>
+                <input
+                  type="text"
+                  onChange={(e) => this.onChangeInputField('addressStreet', e) }
+                  value={ this.state.addressStreet }
+                  id="address-street"
+                  className="form-control"
+                />
+              </div>
+            </div>
+
+            <div className="col-xs-3">
+              <div className="form-group">
+                <label htmlFor="address-number">Number</label>
+                <input
+                  type="text"
+                  onChange={(e) => this.onChangeInputField('addressNumber', e) }
+                  value={ this.state.addressNumber }
+                  id="address-number"
+                  className="form-control"
+                />
+              </div>
+            </div>
+
+            <div className="col-xs-3">
+              <div className="form-group">
+                <label htmlFor="address-addition">Addition</label>
+                <input
+                  type="text"
+                  onChange={(e) => this.onChangeInputField('addressAddition', e) }
+                  value={ this.state.addressAddition }
+                  id="address-addition"
+                  className="form-control"
+                />
+              </div>
+            </div>
+
+            <hr/>
+
+            <div className="col-xs-4">
+              <div className="form-group">
+                <label htmlFor="address-postcode">Postcode</label>
+                <input
+                  type="text"
+                  onChange={(e) => this.onChangeInputField('addressPostcode', e) }
+                  value={ this.state.addressPostcode }
+                  id="address-postcode"
+                  className="form-control"
+                />
+              </div>
+            </div>
+
+            <div className="col-xs-8">
+              <div className="form-group">
+                <label htmlFor="address-city">City</label>
+                <input
+                  type="text"
+                  onChange={(e) => this.onChangeInputField('addressCity', e) }
+                  value={ this.state.addressCity }
+                  id="address-city"
+                  className="form-control"
+                />
+              </div>
+            </div>
+          </div>
+
+
+          <div className="text-right">
+            <button type="submit" className="btn btn-success btn-lg text-right">
+              Submit
+            </button>
+          </div>
         </form>
       </div>
     )

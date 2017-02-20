@@ -4,7 +4,6 @@
   "private": true,
   "main": "index.js",
   "devDependencies": {
-    "axios": "^0.15.3",
     "babel-core": "^6.1.2",
     "babel-loader": "^6.0.1",
     "babel-plugin-syntax-decorators": "^6.0.14",
@@ -18,6 +17,7 @@
     "react-redux": "^5.0.2",
     "react-scripts": "0.9.0",
     "redux": "^3.6.0",
+    "superagent": "^3.4.4",
     "webpack": "^1.14.0"
   },
   "dependencies": {
