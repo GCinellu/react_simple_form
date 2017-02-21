@@ -1,9 +1,9 @@
-import React             from 'react'
-import { addSubscriber } from '../actions'
-import PageComponent     from './PageComponent'
-import store from '../reducers'
-import {redirect} from '../router';
-import {initialCapitalizedWithDot} from './../utils'
+import React                         from 'react'
+import { addSubscriber }             from '../actions'
+import PageComponent                 from './PageComponent'
+import store                         from '../reducers'
+import { redirect }                  from '../router';
+import { initialCapitalizedWithDot } from './../utils'
 
 class AddSubscriber extends PageComponent {
   constructor(props) {
@@ -50,7 +50,13 @@ class AddSubscriber extends PageComponent {
   }
 
   onChangeAddressInput(event) {
+    event.preventDefault();
 
+    let address  = this.state.addressStreet;
+    let postcode = this.state.addressPostcode;
+
+    console.log(address, postcode);
+    console.log(this.state);
   }
 
   initialsFromName() {
@@ -73,6 +79,7 @@ class AddSubscriber extends PageComponent {
         <form onSubmit={ (e) => { this.submitForm(e) }}>
           <h3 className="text-center">Personal Data</h3>
           <hr/>
+
           <div className="form-group">
             <label htmlFor="name-first">First name</label>
             <input
@@ -126,7 +133,6 @@ class AddSubscriber extends PageComponent {
                 <label htmlFor="address-street">Street Name</label>
                 <input
                   type="text"
-                  onChange={(e) => this.onChangeInputField('addressStreet', e) }
                   value={ this.state.addressStreet }
                   id="address-street"
                   className="form-control"
@@ -139,7 +145,6 @@ class AddSubscriber extends PageComponent {
                 <label htmlFor="address-number">Number</label>
                 <input
                   type="text"
-                  onChange={(e) => this.onChangeInputField('addressNumber', e) }
                   value={ this.state.addressNumber }
                   id="address-number"
                   className="form-control"
@@ -152,7 +157,6 @@ class AddSubscriber extends PageComponent {
                 <label htmlFor="address-addition">Addition</label>
                 <input
                   type="text"
-                  onChange={(e) => this.onChangeInputField('addressAddition', e) }
                   value={ this.state.addressAddition }
                   id="address-addition"
                   className="form-control"
@@ -160,14 +164,11 @@ class AddSubscriber extends PageComponent {
               </div>
             </div>
 
-            <hr/>
-
             <div className="col-xs-4">
               <div className="form-group">
                 <label htmlFor="address-postcode">Postcode</label>
                 <input
                   type="text"
-                  onChange={(e) => this.onChangeInputField('addressPostcode', e) }
                   value={ this.state.addressPostcode }
                   id="address-postcode"
                   className="form-control"
@@ -180,7 +181,6 @@ class AddSubscriber extends PageComponent {
                 <label htmlFor="address-city">City</label>
                 <input
                   type="text"
-                  onChange={(e) => this.onChangeInputField('addressCity', e) }
                   value={ this.state.addressCity }
                   id="address-city"
                   className="form-control"

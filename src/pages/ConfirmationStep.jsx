@@ -18,8 +18,6 @@ class ConfirmationStep extends PageComponent {
   render() {
     const subscriberData = store.getState().subscriber;
 
-
-    console.log(subscriberData);
     if (hasEmptyValues(subscriberData)) {
       redirect('/');
       return null;
